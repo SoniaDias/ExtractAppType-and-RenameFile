@@ -27,7 +27,9 @@ def extractContentPdf(pdfPath):
 def extractText(content, pattern):
     match = re.search(pattern, content)
     if match:
-        return match.group(1)
+        firstLine = match.group(1)  
+        secondLine = match.group(2)
+        return firstLine + " " + secondLine
     return None
 
 #Rename file
@@ -70,7 +72,7 @@ def extractRename(directory, pattern):
 
 
 directoryPath = os.path.join(os.getcwd(),"TM copy")
-pattern = r'Executable etc\s*((?:[\w-]+\s*)*?)(?=\n)'
+pattern = r'Executable etc\s*((?:[\w-]+\s*)*?)(?:\n)((?:[\w-]+\s*)*?)'
 existing_csv_path  = '/Users/soniadias/Library/CloudStorage/OneDrive-Checkmarx/Clients/BP/automations/getDataFromPDF/output.csv'
 destination = '/Users/soniadias/Library/CloudStorage/OneDrive-Checkmarx/Clients/BP/automations/getDataFromPDF/processed'
 extractRename(directoryPath, pattern)
